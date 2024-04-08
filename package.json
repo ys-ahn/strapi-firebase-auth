@@ -53,7 +53,7 @@
   },
   "peerDependencies": {
     "@strapi/strapi": "4.12.7",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.3"
   },
   "author": {
     "name": "SwensonHe, LLC"
