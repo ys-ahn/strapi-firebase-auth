@@ -52,7 +52,7 @@
     "typescript": "5.0.4"
   },
   "peerDependencies": {
-    "@strapi/strapi": "4.12.7",
+    "@strapi/strapi": "^4.12.7",
     "styled-components": "^5.3.3"
   },
   "author": {
