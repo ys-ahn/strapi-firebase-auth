@@ -155,27 +155,27 @@ export default ({ strapi }: Params) => ({
       .findOne({ where: { type: settings.default_role } });
     userPayload.role = role.id;
     userPayload.firebaseUserID = decodedToken.uid;
+    userPayload.uid = decodedToken.uid;
     userPayload.confirmed = true;
 
     userPayload.email = decodedToken.email;
     userPayload.phoneNumber = decodedToken.phone_number;
     userPayload.idToken = idToken;
     if (profileMetaData) {
-      userPayload.firstName = profileMetaData?.firstName;
-      userPayload.lastName = profileMetaData?.lastName;
-      userPayload.phoneNumber = profileMetaData?.phoneNumber;
+      userPayload.username = profileMetaData?.username;
+      userPayload.seeds = profileMetaData?.seeds;
     }
 
-    if (decodedToken.email) {
-      const emailComponents = decodedToken.email.split("@");
-      userPayload.username = emailComponents[0];
-      if (emailComponents[1].includes("privaterelay.appleid.com")) {
-        userPayload.appleEmail = decodedToken.email;
-      }
-    } else {
-      userPayload.username = userPayload.phoneNumber;
-      userPayload.email = profileMetaData?.email || (await createFakeEmail());
-    }
+    // if (decodedToken.email) {
+    //   const emailComponents = decodedToken.email.split("@");
+    //   userPayload.username = emailComponents[0];
+    //   if (emailComponents[1].includes("privaterelay.appleid.com")) {
+    //     userPayload.appleEmail = decodedToken.email;
+    //   }
+    // } else {
+    //   userPayload.username = userPayload.phoneNumber;
+    //   userPayload.email = profileMetaData?.email || (await createFakeEmail());
+    // }
 
     return strapi
       .query("plugin::users-permissions.user")
